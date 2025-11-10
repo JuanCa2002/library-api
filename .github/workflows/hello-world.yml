@@ -1,0 +1,28 @@
+name: Hello world
+
+on: 
+  workflow_dispatch: #manually execution
+  push: 
+    branches: 
+      - main
+    paths:
+      - 'LibraryAPI/**'
+      - 'LibraryAPITests/**'
+      - './github/workflows/hello-world.yml'
+  pull_request:
+    branches:
+      - main
+jobs:
+  greeting: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Show message hello world
+        run: echo "hello world Juan"
+        
+      - name: Checkout
+        uses: actions/checkout@v6-beta
+        
+      - name: List files from repositories
+        run: |
+          echo "The repository ${{ github.repository }} contains the following files: "
+          tree 

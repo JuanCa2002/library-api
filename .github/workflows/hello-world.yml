@@ -2,16 +2,16 @@ name: Hello world
 
 on: 
   workflow_dispatch: #manually execution
-  push: 
-    branches: 
-      - main
-    paths:
-      - 'LibraryAPI/**'
-      - 'LibraryAPITests/**'
-      - './github/workflows/hello-world.yml'
-  pull_request:
-    branches:
-      - main
+  #push: 
+  #  branches: 
+  #    - main
+  #  paths:
+  #    - 'LibraryAPI/**'
+  #    - 'LibraryAPITests/**'
+  #    - './github/workflows/hello-world.yml'
+  #pull_request:
+  #  branches:
+  #    - main
 jobs:
   greeting: 
     runs-on: ubuntu-latest

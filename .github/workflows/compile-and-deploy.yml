@@ -12,6 +12,8 @@ on:
       
 env:
   VERSION_DOTNET: '9'
+  AZURE_APP_SERVICE_NAME: LibraryAPI20251107163731
+  AZURE_APP_SERVICE_PACKAGE_LOCATION: '.'
 
 jobs:
   build:
@@ -35,6 +37,34 @@ jobs:
 
       #- name: Do tests
       #  run: dotnet test --no-build
+      - name: Publish Web API
+        run: dotnet publish $proyect -c Release -o libraryApi --runtime win-x86
+
+      - name: Load Artifact
+        uses: actions/upload-artifact@v5.0.0
+        with:
+          path: ./libraryApi
+          name: build
+  deploy:
+    permissions: 
+      contents: none
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Get artifacts
+        uses: actions/download-artifact@v6.0.0
+        with: 
+          name: build
+          
+      - name: Deploy to Azure App Service
+        uses: Azure/webapps-deploy@v2.2.17
+        with:
+          app-name: ${{ env.AZURE_APP_SERVICE_NAME }}
+          publish-profile: ${{ secrets.PUBLIC_AZURE_PROFILE }}
+          package: ${{ env.AZURE_APP_SERVICE_PACKAGE_LOCATION }}
+          
+      
+        
           
       
       

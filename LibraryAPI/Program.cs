@@ -88,7 +88,7 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "Library API",
+        Title = "Library API test",
         Description = "This a WEB API to work with authors and books data",
         Contact = new OpenApiContact
         {
